@@ -12,7 +12,7 @@ require './db/query.php';
 
 </head>
 
-<body class="w-[90%] mx-auto">
+<body class="md:w-[90%] w-full mx-auto">
   <dialog id="my_modal_2" class="modal">
     <form id="modal-form" class="modal-box">
       <div class="flex flex-col justify-center items-center">
