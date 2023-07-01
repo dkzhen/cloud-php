@@ -6,14 +6,13 @@ require './db/query.php';
 
 <head>
   <title>Dashboard - Home</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
   <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://cdn.jsdelivr.net/npm/daisyui@3.1.7/dist/full.css" rel="stylesheet" type="text/css" />
   <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.6/flowbite.min.js"></script>
 
 </head>
 
-<body class="md:w-[90%] w-full mx-auto">
+<body class="w-[90%] mx-auto">
   <dialog id="my_modal_2" class="modal">
     <form id="modal-form" class="modal-box">
       <div class="flex flex-col justify-center items-center">
