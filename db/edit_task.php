@@ -10,8 +10,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     // Prepare and execute the SQL query
     $sql = "UPDATE activitas SET title = '$judulAgenda', activity = '$isiKegiatan' WHERE id = $todoId";
+    $sqlCr = "INSERT INTO stat (`created`,`edited`,`deleted`) VALUES (0,1,0)";
 
-    if ($conn->query($sql) === TRUE) {
+    if ($conn->query($sql) === TRUE && $conn->query($sqlCr) === TRUE) {
         // Database update successful
         $response = [
             'status' => 'success',

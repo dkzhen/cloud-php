@@ -31,7 +31,7 @@ function handleSubmit(event) {
       insertDataSection.innerHTML = `
           <div class="mt-3  alert alert-success">
   <svg xmlns="http://www.w3.org/2000/svg" class="hidden md:flex stroke-current shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
-  <span>Data berhasil ditambahkan ke database!</span>
+  <span>Berhasil! Data berhasil ditambahkan ke database</span>
 </div>
           `;
       var modal = document.getElementById("my_modal_2");
@@ -74,9 +74,20 @@ function deleteTask(todoId) {
     data: {
       id: todoId,
     },
-    success: function (response) {
-      location.reload();
-      console.log(response);
+    success: function () {
+      var insertDataSection = document.getElementById("insert-data");
+      insertDataSection.innerHTML = `
+      <div class="alert alert-error mt-3">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+      <path stroke-linecap="round" stroke-linejoin="round" d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0" />
+    </svg>
+    
+  <span>Deleted! Kegiatan berhasil di hapus.</span>
+</div>`;
+      setTimeout(function () {
+        location.reload();
+      }, 1000); // 1000 milliseconds delay (adjust as needed)
+      // You can also update the UI to reflect the changes if needed
       // You can also update the UI to reflect the changes if needed
     },
     error: function (xhr, status, error) {
@@ -94,8 +105,62 @@ function completeTask(todoId) {
       isCompleted: 1,
     },
     success: function (response) {
-      location.reload();
       console.log(response);
+      var insertDataSection = document.getElementById("insert-data");
+      insertDataSection.innerHTML = `
+      <div class="alert alert-info mt-3">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="stroke-current shrink-0 w-6 h-6"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+      <span>Completed! Kegiatan berhasil diselesaikan</span>
+    </div>`;
+      setTimeout(function () {
+        location.reload();
+      }, 1000); // 1000 milliseconds delay (adjust as needed)
+      // You can also update the UI to reflect the changes if needed
+    },
+    error: function (xhr, status, error) {
+      // Handle the error here
+      console.error(error);
+    },
+  });
+}
+let IDid;
+function handleFormEdit(title, activity, id) {
+  IDid = id;
+  var activities = activity;
+  var titles = title;
+  if (activities != undefined && titles != undefined) {
+    document.getElementById("title").value = titles;
+    document.getElementById("activity").value = activities;
+  } else {
+    document.getElementById("title").value = "";
+    document.getElementById("activity").value = "";
+  }
+  // console.log(IDid);
+}
+
+function handleEdit() {
+  var id = IDid;
+  var judulAgenda = document.querySelector('input[name="title"]').value;
+  var isiKegiatan = document.querySelector('input[name="activity"]').value;
+  $.ajax({
+    url: "./db/edit_task.php",
+    type: "POST",
+    data: {
+      id: id,
+      title: judulAgenda,
+      activity: isiKegiatan,
+    },
+    success: function (response) {
+      // console.log(idTodo);
+      var insertDataSection = document.getElementById("insert-data");
+      insertDataSection.innerHTML = `
+      <div class="alert alert-info mt-3">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="stroke-current shrink-0 w-6 h-6"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+      <span>Update! Kegiatan berhasil diedit</span>
+    </div>`;
+      setTimeout(function () {
+        location.reload();
+      }, 1000); // 1000 milliseconds delay (adjust as needed)
       // You can also update the UI to reflect the changes if needed
     },
     error: function (xhr, status, error) {

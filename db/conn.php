@@ -1,7 +1,7 @@
 <?php
-$servername = "localhost";
+$servername = "127.0.0.1";
 $username = "root";
-$password = "Root123";
+$password = "";
 $dbname = 'todolist';
 
 // Create connection

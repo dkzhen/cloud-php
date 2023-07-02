@@ -9,9 +9,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Modify the query and database table according to your actual implementation
 
     $sql = "DELETE FROM activitas WHERE id=$todoId";
+    $sqlCr = "INSERT INTO stat (`created`,`edited`,`deleted`) VALUES (0,0,1)";
 
-
-    if ($conn->query($sql) === TRUE) {
+    if ($conn->query($sql) === TRUE && $conn->query($sqlCr) === TRUE) {
         // Database insertion successful
         $response = [
             'status' => 'success',

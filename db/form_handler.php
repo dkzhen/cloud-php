@@ -7,9 +7,13 @@ if (isset($_POST['judul_agenda'])) {
     $isiKegiatan = $_POST['isi_kegiatan'];
 
 
+
     // Prepare and execute the SQL query
     $sql = "INSERT INTO activitas (`title`,`activity`,`isCompleted`) VALUES ('$judulAgenda', '$isiKegiatan',0);";
-    if ($conn->query($sql) === TRUE) {
+    // Set your desired value here
+    $sqlCr = "INSERT INTO stat (`created`,`edited`,`deleted`) VALUES (1,0,0)";
+
+    if ($conn->query($sql) === TRUE && $conn->query($sqlCr) === TRUE) {
         // Database insertion successful
         $response = [
             'status' => 'success',
