@@ -65,14 +65,17 @@ var modalForm = document.getElementById("modal-form");
 
 // Attach the submit event listener to the modal form
 modalForm.addEventListener("submit", handleSubmit);
-
+let idDelete;
+function checkId(params) {
+  idDelete = params;
+}
 // Refresh every 5 seconds (5000 milliseconds)
-function deleteTask(todoId) {
+function deleteTask() {
   $.ajax({
     url: "./db/delete.php",
     type: "POST",
     data: {
-      id: todoId,
+      id: idDelete,
     },
     success: function () {
       var insertDataSection = document.getElementById("insert-data");
